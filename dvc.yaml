@@ -1,6 +1,6 @@
 stages:
   visualize_data:
-    cmd: python src/data.visualization.py
+    cmd: python src/data_visualization.py
     deps:
       - data/raw/bank-additional-full.csv
     outs:
@@ -10,3 +10,11 @@ stages:
       - docs/figures/distribucion_dia_semana.png
       - docs/figures/distribucion_duracion.png
       - docs/figures/distribucion_edad.png
+
+  test_data_quality:
+    cmd: pytest --html=docs/test_results/test_results.html --self-contained-html test/test_data_quality.py
+    deps:
+      - test/test_data_quality.py
+      - data/raw/bank-additional-full.csv
+    outs:
+      - docs/test_results/test_results.html

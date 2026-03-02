@@ -10,14 +10,6 @@ def datos_banco():
 
 
 def test_esquema(datos_banco):
-    """
-    Test de esquema para el DataFrame de datos_banco.
-
-    Args:
-        datos_banco (pd.DataFrame): DataFrame que contiene los datos del banco.
-    """
-    df = datos_banco
-
     esquema = DataFrameSchema({
         "age": Column(int, nullable=False),
         "job": Column(str, nullable=False),
@@ -42,48 +34,14 @@ def test_esquema(datos_banco):
         "y": Column(str, nullable=False),
     })
 
-    esquema.validate(df)
+    esquema.validate(datos_banco)
 
 
 def test_basico(datos_banco):
-    """
-    Test básico para verificar que el DataFrame de datos_banco no está vacío
-    y contiene las columnas esperadas.
-    """
-
     df = datos_banco
 
-    # Verificar que el DataFrame no está vacío
     assert not df.empty, "El DataFrame está vacío."
-
-    # Verificar nulos
     assert df.isnull().sum().sum() == 0, "El DataFrame contiene valores nulos."
-
-    # Verificar duplicados
-   #  assert df.duplicated().sum() == 0, "El DataFrame contiene filas duplicadas."
-
-    # Verificar cantidad de columnas
-    assert df.shape[1] == 21, (
-        f"El DataFrame debería tener 21 columnas, pero tiene {df.shape[1]}."
-    )
-    
-    if __name__ == "__main__":
-    try:
-        test_esquema(datos_banco())
-        test_basico(datos_banco())
-        print("Todos los tests pasaron exitosamente.")
-
-        from pathlib import Path
-        Path("docs/test_results").mkdir(parents=True, exist_ok=True)
-
-        with open("docs/test_results/test_results.txt", "w") as f:
-            f.write("Todos los tests pasaron exitosamente.\n")
-
-    except AssertionError as e:
-        print(f"Test fallido: {e}")
-
-        from pathlib import Path
-        Path("docs/test_results").mkdir(parents=True, exist_ok=True)
-
-        with open("docs/test_results/test_results.txt", "w") as f:
-            f.write(f"Test fallido: {e}\n")
+    # OJO: este dataset puede traer duplicados, por eso lo dejo comentado
+    # assert df.duplicated().sum() == 0, "El DataFrame contiene filas duplicadas."
+    assert df.shape[1] == 21, f"El DataFrame debería tener 21 columnas, pero tiene {df.shape[1]}."
