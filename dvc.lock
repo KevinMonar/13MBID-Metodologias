@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  visualize_data:
+    cmd: python src/data.visualization.py
+    deps:
+    - path: data/raw/bank-additional-full.csv
+      hash: md5
+      md5: f6cb2c1256ffe2836b36df321f46e92c
+      size: 5834924
+    outs:
+    - path: docs/figures/distribucion_dia_semana.png
+      hash: md5
+      md5: f9b9fdaf6e6eeef8d5700b907f8cc7c6
+      size: 15904
+    - path: docs/figures/distribucion_duracion.png
+      hash: md5
+      md5: a03ea6a0824cc7429492e3b21f79df39
+      size: 22135
+    - path: docs/figures/distribucion_edad.png
+      hash: md5
+      md5: be47d84c41f90f40388d08d37e1fb08d
+      size: 25696
+    - path: docs/figures/distribucion_educacion.png
+      hash: md5
+      md5: 3412f8cf634d235ede2d3cfd94c5c603
+      size: 21878
+    - path: docs/figures/distribucion_target.png
+      hash: md5
+      md5: b1ad605fc0115c95f236e15fa96a9694
+      size: 21683
+    - path: docs/figures/distribucion_trabajo.png
+      hash: md5
+      md5: b5b913ac6d676baf2792a9b8dcb022ee
+      size: 25064
