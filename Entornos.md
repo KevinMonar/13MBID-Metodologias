@@ -1,4 +1,4 @@
-# 13MIBD Metodologías de Gestión de Proyectos de Big Data
+ñ# 13MIBD Metodologías de Gestión de Proyectos de Big Data
 
 ## WINDOWS >> Pasos a seguir para generar el entorno de trabajo
 
