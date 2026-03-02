@@ -18,3 +18,12 @@ stages:
       - data/raw/bank-additional-full.csv
     outs:
       - docs/test_results/test_results.html
+  
+
+  test_data_gx: 
+      cmd: pytest --html=docs/test_results/test_result_gx.html --self-contained-html test/test_data_gx.py
+      deps:
+      - test/test_data_gx.py
+      - data/raw/bank-additional-full.csv
+      outs:
+       - docs/test_results/test_result_gx.html

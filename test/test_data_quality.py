@@ -42,6 +42,20 @@ def test_basico(datos_banco):
 
     assert not df.empty, "El DataFrame está vacío."
     assert df.isnull().sum().sum() == 0, "El DataFrame contiene valores nulos."
-    # OJO: este dataset puede traer duplicados, por eso lo dejo comentado
     # assert df.duplicated().sum() == 0, "El DataFrame contiene filas duplicadas."
-    assert df.shape[1] == 21, f"El DataFrame debería tener 21 columnas, pero tiene {df.shape[1]}."
+    assert df.shape[1] == 21, (
+        f"El DataFrame debería tener 21 columnas, pero tiene {df.shape[1]}."
+    )
+
+
+def test_rango_edad(datos_banco):
+    df = datos_banco
+    assert df["age"].between(0, 120).all(), (
+        "La edad debe estar entre 0 y 120."
+    )
+    
+def test_campaign_valida(datos_banco):
+    df = datos_banco
+    assert (df["campaign"] >= 1).all(), (
+        "La cantidad de contactos en campaña debe ser al menos 1."
+    )
