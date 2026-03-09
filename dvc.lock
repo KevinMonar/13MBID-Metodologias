@@ -50,7 +50,7 @@ stages:
       md5: 428632973b4fd1fa3cd5e3fad3cde69b
       size: 35117
   test_data_gx:
-    cmd: pytest --html=docs/test_results/test_result_gx.html 
+    cmd: pytest --html=docs/test_results/test_results_gx.html 
       --self-contained-html test/test_data_gx.py
     deps:
     - path: data/raw/bank-additional-full.csv
@@ -62,7 +62,47 @@ stages:
       md5: dd674b350b5542411816b18ec0c10b2f
       size: 1980
     outs:
-    - path: docs/test_results/test_result_gx.html
+    - path: docs/test_results/test_results_gx.html
       hash: md5
-      md5: 6a50a20b619ddcc97d13c75d194fed9c
-      size: 33317
+      md5: 83bcc73350cda5310e3a0a57a3090091
+      size: 33320
+  preprocess_data:
+    cmd: python src/data_preparation.py
+    deps:
+    - path: data/raw/bank-additional-full.csv
+      hash: md5
+      md5: f6cb2c1256ffe2836b36df321f46e92c
+      size: 5834924
+    - path: src/data_preparation.py
+      hash: md5
+      md5: 00b4ba9123ffa68fb7113e0f680769e2
+      size: 1647
+    outs:
+    - path: data/processed/bank-processed.csv
+      hash: md5
+      md5: e93d2c7ccbd0f5c8cf4866151224039a
+      size: 4561035
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/processed/bank-processed.csv
+      hash: md5
+      md5: e93d2c7ccbd0f5c8cf4866151224039a
+      size: 4561035
+    - path: src/train_model.py
+      hash: md5
+      md5: eccfb9b5c3e13aab85af12617732652b
+      size: 8973
+    outs:
+    - path: metrics/train_metrics.json
+      hash: md5
+      md5: 7df15fc4485218ce84b8196db1b46826
+      size: 162
+    - path: models/decision_tree_model.pkl
+      hash: md5
+      md5: 728174cef03be3fdf76504d926714aa9
+      size: 218361
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: 7ac3c8da3c02277bbae2614ea3666b21
+      size: 6536
