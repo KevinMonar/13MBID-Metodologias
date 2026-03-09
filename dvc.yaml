@@ -41,3 +41,11 @@ stages:
       - models/preprocessor.pkl
     metrics:
       - metrics/train_metrics.json
+
+  test_training:
+    cmd: pytest test/test_training.py
+    deps:
+      - test/test_training.py
+      - src/train_model.py
+      - metrics/train_metrics.json
+      - data/processed/bank-processed.csv
