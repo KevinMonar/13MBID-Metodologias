@@ -13,3 +13,6 @@ pandera
 great_expectations 
 fastapi 
 plotly 
+uvicorn[standard]
+joblib
+pydantic
